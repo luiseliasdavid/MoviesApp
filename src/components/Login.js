@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 export default function Login() {
     
     const navigate= useNavigate();
-    console.log(navigate)
+    
     const submmitHandler = (e)=> {
         e.preventDefault()
         const email= e.target.email.value;
