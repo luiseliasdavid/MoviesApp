@@ -1,6 +1,8 @@
 import axios from 'axios'
 import swalert from '@sweetalert/with-react';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,Navigate} from 'react-router-dom'
+
+
 //usuario:challenge@alkemy.org  pass:react
 export default function Login() {
     
@@ -40,8 +42,11 @@ export default function Login() {
         })
 
     }
+    let token= localStorage.getItem('token')
+    
     return(
            <>
+           { token && <Navigate to='/listado'/>}
            <h2>Formulario de login</h2>
         <form onSubmit={submmitHandler} >
             <label>
