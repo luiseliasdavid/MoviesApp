@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, CardGroup } from 'react-bootstrap';
 
 
 
@@ -34,23 +34,30 @@ export default function Listado() {
   return (
     <>
       {!token && <Navigate to='/' />}
+
       <div className='row'>
-        <div className='col-3' >
+        {
+        moviList.map((oneMovie,index)=>{ 
+          return ( 
+        <div className='col-3' key={index} >
+           <CardGroup>
           <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`} />
             <Card.Body>
-              <Card.Title>Card Title</Card.Title>
+              <Card.Title>{oneMovie.title.substring(0,30)}... </Card.Title>
               <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                {oneMovie.overview.substring(0,150)}...
               </Card.Text>
               <Button href='/' variant="primary">Go somewhere</Button>
             </Card.Body>
           </Card>
-
+</CardGroup>
         </div>
-
+          )
+         })
+        }
       </div>
+      
     </>
   )
 }
