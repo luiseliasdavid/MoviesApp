@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Card, Button, CardGroup } from 'react-bootstrap';
-
+import swal from 'sweetalert'
 
 
 
@@ -28,6 +28,9 @@ export default function Listado() {
         setMoviList(apiData)
       }
       )
+      .catch( error=>{
+        swal('Hubo errores,intenta mas tarde');
+      })
   }, [setMoviList])
 
   console.log(moviList)

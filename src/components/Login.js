@@ -1,5 +1,5 @@
 import axios from 'axios'
-import swalert from '@sweetalert/with-react';
+import swal from 'sweetalert'
 import {useNavigate,Navigate} from 'react-router-dom'
 
 
@@ -15,14 +15,14 @@ export default function Login() {
         const regexEmail= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
         //console.log(regexEmail.test(email))
         if(email==='' || password===''){
-            swalert(
+            swal(
                 <h2>Los campos no pueden estar vacios</h2>
             )
             return;
         }
         if (email!=='' && !regexEmail.test(email)){
-            swalert(
-                <h2>Escribir un formato valido</h2>
+            swal(
+                'Escribir un formato valido'
             )
             return;
         }
@@ -33,7 +33,7 @@ export default function Login() {
         console.log('ok estamos listos')
         axios.post('http://challenge-react.alkemy.org',{email,password})
         .then( res=> {
-            swalert(
+            swal(
                 <h2>Perfecto, ingresaste correctamente</h2>
             )
             const tokenRecivido =res.data.token;
