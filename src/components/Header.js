@@ -4,10 +4,11 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Buscador from './Buscador'
 
 function Header (){
 return(
-    <header>
+    <header className='container p-3 my-3 border'>
         <div></div>
          <Navbar bg="dark" variant="dark">
         <Container>
@@ -17,21 +18,10 @@ return(
             <Nav.Link href="listado">Listado</Nav.Link>
             <Nav.Link href="contacto">Contacto</Nav.Link>
           </Nav>
+        <Buscador />
         </Container>
       </Navbar>
-       {/* <nav>
-        <ul>
-            <li>
-                <Link to='/'>Home</Link>
-            </li>
-            <li>
-                <Link to='Listado'>Listado</Link>
-            </li>
-            <li>
-                <Link to='Contacto'>Contacto</Link>
-            </li>
-        </ul>
-       </nav> */}
+      
     </header>
 )
 

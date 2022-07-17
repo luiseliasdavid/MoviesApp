@@ -1,47 +1,42 @@
-import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button, CardGroup } from "react-bootstrap";
-import swal from "sweetalert";
+import swal from 'sweetalert'
 
-export default function Listado(props) {
 
-  console.log(props)
-  let token = sessionStorage.getItem("token");
-
-  //const navigate= useNavigate()
-
-  //otra forma de de redirigir si no  esta logueado
-  // useEffect(()=>{
-  //     const token= localStorage.getItem('token')
-  //    if(token===null){
-  //      navigate('/')}
-  // },[navigate])
-  const [moviList, setMoviList] = useState([]);
-
+function Resultados() {
+  
+  let query = new URLSearchParams(window.location.search);
+  let keyword = query.get("keyword");
+  const [movieResults, setMovieResults] = useState([]);
+  
   useEffect(() => {
-    const endPoint =
-      "https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=1";
-    axios
-      .get(endPoint)
-      .then((response) => {
-        const apiData = response.data.results;
-        setMoviList(apiData);
-      })
-      .catch((error) => {
-        swal("Hubo errores,intenta mas tarde");
-      });
-  }, [setMoviList]);
+    const endPoint=`https://api.themoviedb.org/3/search/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=1&include_adult=false&query=${keyword}`
+    axios.get(endPoint)
+    .then(response => {
+      const movieData= response.data.results;
+      if (movieData.length===0){
+      swal({
+        title: 'tu busqueda no arrojo resultados'
+      }) }
+      setMovieResults(movieData)
+    })
+    .catch( error=> {
+      console.log(error)
+    })
+  },[keyword]
+  );
+  // https://api.themoviedb.org/3/search/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=1&include_adult=false
 
-  // console.log(moviList)
+  //console.log(keyword);
   return (
     <>
-      {!token && <Navigate to="/" />}
-
+    <h2>Buscaste: `${keyword}`</h2> 
+    {movieResults.length ===0 && <h3>No hay resultados</h3> }
       <div className="row">
-        {moviList.map((oneMovie, index) => {
+        {movieResults.map((oneMovie, index) => {
           return (
-            <div className="col-3" key={index}>
+            <div className="col-4" key={index}>
               <CardGroup>
                 <Card style={{ width: "18rem" }}>
                   <Card.Img
@@ -71,3 +66,5 @@ export default function Listado(props) {
     </>
   );
 }
+
+export default Resultados;
