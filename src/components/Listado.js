@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button, CardGroup } from "react-bootstrap";
 import swal from "sweetalert";
+import './Listado.css'
 
 export default function Listado(props) {
 
-  console.log(props)
+  //console.log(props)
   let token = sessionStorage.getItem("token");
 
+
+  
   //const navigate= useNavigate()
 
   //otra forma de de redirigir si no  esta logueado
@@ -48,6 +51,7 @@ export default function Listado(props) {
                     variant="top"
                     src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
                   />
+                  <Button className="favourtite-btn" onClick={props.addOrRemoveFromFavs}>🖤</Button>
                   <Card.Body>
                     <Card.Title>
                       {oneMovie.title.substring(0, 30)}...{" "}

@@ -7,12 +7,17 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Detalle from './components/Detalle'
 import Resultados from './components/Resultados';
-
+import './App.css'
 
 function App() {
-  const addOrRemoveFromFavs =() =>{
-    console.log(('ok funciono'))
+  const addOrRemoveFromFavs =e =>{
+    const btn = e.currentTarget;
+    const parent = btn.parentElement
+    const imageUrl= parent.querySelector('img').getAttribute('src')
+
+    console.log((imageUrl))
   }
+
   return (
     <div className='container'>
     <Header/>

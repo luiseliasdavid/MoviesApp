@@ -31,7 +31,7 @@ function Resultados() {
   //console.log(keyword);
   return (
     <>
-    <h2>Buscaste: `${keyword}`</h2> 
+    <h2>Buscaste: {keyword}</h2> 
     {movieResults.length ===0 && <h3>No hay resultados</h3> }
       <div className="row">
         {movieResults.map((oneMovie, index) => {
