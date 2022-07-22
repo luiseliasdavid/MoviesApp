@@ -51,7 +51,10 @@ export default function Listado(props) {
                     variant="top"
                     src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
                   />
-                  <Button className="favourtite-btn" onClick={props.addOrRemoveFromFavs}>🖤</Button>
+                  <Button className="favourtite-btn" 
+                  onClick={props.addOrRemoveFromFavs}
+                  data-movie-id={oneMovie.id}
+                  >🖤</Button>
                   <Card.Body>
                     <Card.Title>
                       {oneMovie.title.substring(0, 30)}...{" "}
@@ -65,6 +68,7 @@ export default function Listado(props) {
                     >
                       Detalle
                     </Button>
+                    
                   </Card.Body>
                 </Card>
               </CardGroup>
@@ -72,6 +76,9 @@ export default function Listado(props) {
           );
         })}
       </div>
+      <br></br>
+      <br></br>
+      <p>.</p>
     </>
   );
 }
