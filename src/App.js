@@ -9,6 +9,7 @@ import Detalle from './components/Detalle'
 import Resultados from './components/Resultados';
 import Favoritos from './components/Favoritos';
 import './App.css'
+import {AuthProvider} from './authContext/authContext'
 
 function App() {
   const [favorites,setFavorites] = useState([])
@@ -73,7 +74,7 @@ useEffect(()=>{
 
     return (
       <div className='container'>
-        
+        <AuthProvider>
         <Header favorites={favorites}/>
         <Routes>
           <Route exact path='/' element={<Login />} />
@@ -85,6 +86,7 @@ useEffect(()=>{
         </Routes>
 
         <Footer />
+      </AuthProvider> 
       </div>
     );
   }

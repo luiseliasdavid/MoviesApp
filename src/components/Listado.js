@@ -4,11 +4,17 @@ import axios from "axios";
 import { Card, Button, CardGroup } from "react-bootstrap";
 import swal from "sweetalert";
 import './Listado.css'
+import { useAuth } from "../authContext/authContext";
+
 
 export default function Listado(props) {
+  
+  const authContext= useAuth()
 
-  //console.log(props)
+  console.log(authContext.user)
+
   let token = sessionStorage.getItem("token");
+
 
 
   
@@ -35,6 +41,8 @@ export default function Listado(props) {
         swal("Hubo errores,intenta mas tarde");
       });
   }, [setMoviList]);
+
+  
 
   // console.log(moviList)
   return (
