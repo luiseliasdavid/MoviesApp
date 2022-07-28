@@ -11,7 +11,7 @@ export default function Listado(props) {
   
   const authContext= useAuth()
 
-  console.log(authContext.user)
+  //console.log(authContext.user)
 
   let token = sessionStorage.getItem("token");
 
@@ -47,7 +47,7 @@ export default function Listado(props) {
   // console.log(moviList)
   return (
     <>
-      {!token && <Navigate to="/" />}
+      {/* {!token && <Navigate to="/" />} */}
 
       <div className="row">
         {moviList.map((oneMovie, index) => {

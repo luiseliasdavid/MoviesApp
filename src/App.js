@@ -8,8 +8,10 @@ import Footer from './components/Footer';
 import Detalle from './components/Detalle'
 import Resultados from './components/Resultados';
 import Favoritos from './components/Favoritos';
+import Register from './components/Register'
 import './App.css'
 import {AuthProvider} from './authContext/authContext'
+
 
 function App() {
   const [favorites,setFavorites] = useState([])
@@ -75,9 +77,12 @@ useEffect(()=>{
     return (
       <div className='container'>
         <AuthProvider>
+          
         <Header favorites={favorites}/>
         <Routes>
-          <Route exact path='/' element={<Login />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/register' element={<Register />} />
+          <Route path='/' element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />} />
           <Route path='/listado' element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />} />
           <Route path='/detalle' element={<Detalle />} />
           <Route path='/resultados' element={<Resultados addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />

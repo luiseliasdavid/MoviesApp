@@ -12,9 +12,9 @@ return(
         <div></div>
          <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="#home">Movies App</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="listado">Home</Nav.Link>
             <Nav.Link href="listado">Listado</Nav.Link>
             <Nav.Link href="favoritos">Favoritos</Nav.Link>
             <Nav.Link href="contacto">Contacto</Nav.Link>
@@ -23,6 +23,10 @@ return(
               </Nav.Link>
           </Nav>
         <Buscador />
+        <Nav className="me-auto">
+        <Nav.Link href='login' variant="red">Login</Nav.Link>
+        <Nav.Link href='register' variant="red">Register </Nav.Link>
+        </Nav>
         </Container>
       </Navbar>
       

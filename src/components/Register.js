@@ -9,9 +9,9 @@ import { async } from '@firebase/util';
 import Alert from 'react-bootstrap/Alert';
 
 
-//usuario:challenge@alkemy.org  pass:react
 
-export default function Login() {
+
+export default function Register() {
   const regexEmail= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
   const [user,setUser] = useState({
     email:'',
@@ -75,14 +75,14 @@ export default function Login() {
       }
     }
     
-     console.log(error,'estos son los errores')
+    
     let token= sessionStorage.getItem('token')
     
     return(
            <>
            { error && <p> {error} </p>}
            {/* { token && <Navigate to='/listado'/>} */}
-           <h2>Formulario de login</h2>
+           <h2>Formulario de Registro</h2>
         {/* <form onSubmit={submmitHandler} >
             <label>
                 <span>Correo electronico:</span><br/>
