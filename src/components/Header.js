@@ -1,12 +1,22 @@
 
 // estilos boostrap
-
+import { useAuth } from '../authContext/authContext';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/esm/Button';
 import Buscador from './Buscador'
 
+
 function Header (props){
+
+  const {user, logout} = useAuth()
+  
+  
+const handleLogout = async () =>{
+  await logout()
+}
+
 return(
     <header className='container p-3 my-3 border'>
         <div></div>
@@ -23,10 +33,21 @@ return(
               </Nav.Link>
           </Nav>
         <Buscador />
+        {!user &&
+        <>
         <Nav className="me-auto">
         <Nav.Link href='login' variant="red">Login</Nav.Link>
         <Nav.Link href='register' variant="red">Register </Nav.Link>
         </Nav>
+        </>}
+        { user && <>
+          <Nav className="me-auto">
+          <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link>
+          <Button onClick={handleLogout} size="sm" variant="outline-danger">LogOut</Button>
+          </Nav>
+        </>
+
+        }
         </Container>
       </Navbar>
       
