@@ -5,8 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useAuth } from '../authContext/authContext';
 import Alert from 'react-bootstrap/Alert';
-
-
+import Image from 'react-bootstrap/Image'
+import GoogleButton from 'react-google-button'
 
 
 
@@ -86,7 +86,10 @@ export default function Register() {
           password debe tener 6 caracteres al menos
         </Alert> }
       </Form.Group>
- 
+      
+      <GoogleButton onClick={() => { console.log('Google button clicked') }}/>
+      <br/>
+       <br/>
       <Button variant="primary" type="submit">
         Submit
       </Button>

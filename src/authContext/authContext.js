@@ -27,7 +27,10 @@ const login = async (email,password) => {
     await signInWithEmailAndPassword (auth,email,password);
 }
 
-const logout = async ()=> signOut(auth)
+const logout = async ()=> {
+    await signOut(auth)
+
+}
 
 useEffect(()=>{
 onAuthStateChanged(auth, currentUser => {

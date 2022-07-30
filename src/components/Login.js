@@ -14,11 +14,12 @@ import Alert from 'react-bootstrap/Alert';
 
 export default function Login() {
   const regexEmail= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+  
   const [userData,setUserData] = useState({
     email:'',
     password: ''
   })
-
+  
   const {user} = useAuth()
 
   const [error,setError]= useState('')
@@ -29,7 +30,7 @@ export default function Login() {
 
     const handleChange = ({target: {name, value}}) =>{
 
-    setUserData({...user,[name]:value})}
+    setUserData({...userData,[name]:value})}
 
     const submmitHandler = async(e)=> {
         e.preventDefault()
@@ -42,15 +43,16 @@ export default function Login() {
             )
             return;
         }
-        if (userData.email!=='' && !regexEmail.test(userData.email)){
-          swal(
-            { title:'Escribir un formato valido'}
-            )
-            return;
-          }
+        // if (userData.email!=='' ){
+        //   swal(
+        //     { title:'Escribir un formato valido'}
+        //     )
+        //     return;
+        //   }
           
 
         try{
+          console.log(userData.email)
           await login(userData.email,userData.password)
           navigate('/listado')
       }
@@ -66,14 +68,14 @@ export default function Login() {
     return(
            <>
            { error && <p> {error} </p>}
-           { user && <Navigate to='/listado'/>}
+           {/* { user && <Navigate to='/listado'/>} */}
            <h2>Formulario de login</h2>
        <div className='row'>
            <Form onSubmit={submmitHandler} className='col-3' >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type='email' name='email' placeholder="Enter email" onChange={handleChange} />
-        { userData.password.length>1 && !regexEmail.test(userData.email) && <p textcolor ='red'>
+        { userData.password?.length>1 && <p textcolor ='red'>
           email debe ser un formato valido
         </p> }
         
@@ -82,7 +84,7 @@ export default function Login() {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control minLength={6} type='password' name='password' placeholder="Password" onChange={handleChange}/>
-        { userData.password.length<6 && userData.password.length>1 &&<Alert variant={'warning'} >
+        { userData.password?.length<6 && userData.password.length>1 &&<Alert variant={'warning'} >
           password debe tener 6 caracteres al menos
         </Alert> }
       </Form.Group>

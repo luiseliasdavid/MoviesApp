@@ -11,6 +11,7 @@ import Favoritos from './components/Favoritos';
 import Register from './components/Register'
 import './App.css'
 import {AuthProvider} from './authContext/authContext'
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 
 function App() {
@@ -80,8 +81,16 @@ useEffect(()=>{
           
         <Header favorites={favorites}/>
         <Routes>
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/register' element={<Register />} />
+          
+          <Route exact path='/login' element={<ProtectedRoute>
+          <Login />
+          </ProtectedRoute>
+          } />
+          <Route exact path='/register' element={<ProtectedRoute>
+          <Register />
+          </ProtectedRoute>
+          } />
+          
           <Route path='/' element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />} />
           <Route path='/listado' element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />} />
           <Route path='/detalle' element={<Detalle />} />
