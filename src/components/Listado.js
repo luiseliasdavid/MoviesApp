@@ -28,29 +28,32 @@ export default function Listado(props) {
   // },[navigate])
   const [moviList, setMoviList] = useState([]);
 
-  useEffect(() => {
-    const endPoint =
-      "https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=1";
-    axios
-      .get(endPoint)
-      .then((response) => {
-        const apiData = response.data.results;
-        setMoviList(apiData);
-      })
-      .catch((error) => {
-        swal("Hubo errores,intenta mas tarde");
-      });
-  }, [setMoviList]);
+  useEffect( () => {
+
+    const getPelis =  async() => {
+      const apiGamesInfo = 5; 
+     
+      let pelis=[]
+    
+      for (let i = 1; i <= apiGamesInfo; i++) {
+        pelis.push(await axios.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=${i}`)
+      .then(res=>res.data.results))}
+        
+        setMoviList(pelis.flat())
+         }
+    getPelis()
+   
+}, [setMoviList]);
 
   
-
-  // console.log(moviList)
+ 
   return (
     <>
       {/* {!token && <Navigate to="/" />} */}
 
       <div className="row">
-        {moviList.map((oneMovie, index) => {
+        {moviList?.map((oneMovie, index) => {
           return (
             <div className="col-3" key={index}>
               <CardGroup>
@@ -90,3 +93,30 @@ export default function Listado(props) {
     </>
   );
 }
+
+/*
+
+const getApiInfo =  () => {
+  const apiGamesInfo = 5; 
+ 
+  let pelis=[]
+
+  for (let i = 1; i <= apiGamesInfo; i++) {
+    pelis.push(axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=i`).then(res=>res.data.results))}
+    
+    return Promise.all(nonstop)
+     .then(res=>console.log(res))
+
+*/
+/*
+const getApiInfo =  () => {
+  const apiGamesInfo = 5; 
+ 
+  let pelis=[]
+
+  for (let i = 1; i <= apiGamesInfo; i++) {
+    pelis.push(axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=i`).then(res=>res.data.results))}
+    
+    return Promise.all(nonstop)
+     .then(res=>console.log(res))
+*/

@@ -1,0 +1,14 @@
+.cont2 {
+   
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 15px;
+    padding-right: 5px;
+}
+
+.name-buttom {
+    display: flex;
+    flex-direction: column;
+    
+}

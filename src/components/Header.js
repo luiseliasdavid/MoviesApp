@@ -6,17 +6,27 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/esm/Button';
 import Buscador from './Buscador'
+import Image from 'react-bootstrap/Image'
+import { useEffect, useState } from 'react';
+import './Header.css'
 
 
 function Header (props){
 
   const {user, logout} = useAuth()
+  const [userImg, setUserImg] = useState('')
   
-  
+  //console.log(user)
+  useEffect(()=>{
+    if(user !==null){
+      setUserImg(user.photoURL.toString())
+    }
+  },[user])
+
 const handleLogout = async () =>{
   await logout()
 }
-console.log(user?.photoURL)
+// console.log(user?.photoURL)
 return(
     <header className='container p-3 my-3 border'>
         <div></div>
@@ -32,7 +42,8 @@ return(
               {props.favorites.length>0 && <> Favoritos:{props.favorites.length} </>}
               </Nav.Link>
           </Nav>
-        <Buscador />
+          </Container>
+          <div className="cont2">
         {!user &&
         <>
         <Nav className="me-auto">
@@ -40,22 +51,29 @@ return(
         <Nav.Link href='register' variant="red">Register </Nav.Link>
         </Nav>
         </>}
-        { user && <>
+        {user && !user.displayName && <>
+          <Nav.Link>welcome: {user.email}</Nav.Link>
+        </>}
+        { user && user.displayName && <>
           <Nav className="me-auto">
           {/* <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link> */}
          
-      
-        <img src={user.photoURL} alt={user.name} />
-        <h2>{user.displayName}</h2>
-        <p>Email: {user.email}</p>
-      
-    
-          <Button onClick={handleLogout} size="sm" variant="outline-danger">LogOut</Button>
+         <div className='name-buttom'>
+        <Nav.Link className="me-auto">Welcome: {user.displayName}</Nav.Link>
+          <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
+        
+         </div>
+        {userImg && <Image roundedCircle={true} src={userImg} alt={user.name} />}
+        
           </Nav>
         </>
 
         }
-        </Container>
+        </div>
+      </Navbar>
+
+      <Navbar>
+      <Buscador />
       </Navbar>
       
     </header>
