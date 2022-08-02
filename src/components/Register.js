@@ -23,7 +23,7 @@ export default function Register() {
 
     const navigate= useNavigate();
 
-    const {singUp} =useAuth()
+    const {singUp,loginWithGoogle} =useAuth()
 
     const handleChange = ({target: {name, value}}) =>{
 
@@ -63,6 +63,11 @@ export default function Register() {
     
     let token= sessionStorage.getItem('token')
     
+    const handleGoogleRegister = async ()=>{
+      await loginWithGoogle()
+      navigate('/listado')
+    }
+    
     return(
            <>
            { error && <p> {error} </p>}
@@ -87,7 +92,7 @@ export default function Register() {
         </Alert> }
       </Form.Group>
       
-      <GoogleButton onClick={() => { console.log('Google button clicked') }}/>
+      <GoogleButton onClick={handleGoogleRegister}/>
       <br/>
        <br/>
       <Button variant="primary" type="submit">

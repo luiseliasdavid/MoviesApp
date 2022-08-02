@@ -16,7 +16,7 @@ function Header (props){
 const handleLogout = async () =>{
   await logout()
 }
-
+console.log(user?.photoURL)
 return(
     <header className='container p-3 my-3 border'>
         <div></div>
@@ -42,7 +42,14 @@ return(
         </>}
         { user && <>
           <Nav className="me-auto">
-          <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link>
+          {/* <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link> */}
+         
+      
+        <img src={user.photoURL} alt={user.name} />
+        <h2>{user.displayName}</h2>
+        <p>Email: {user.email}</p>
+      
+    
           <Button onClick={handleLogout} size="sm" variant="outline-danger">LogOut</Button>
           </Nav>
         </>

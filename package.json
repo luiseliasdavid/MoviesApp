@@ -17,6 +17,7 @@
     "react-lorem-ipsum": "^1.4.10",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-social-login-buttons": "^3.6.1",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },

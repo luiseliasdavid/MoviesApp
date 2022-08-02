@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { useAuth } from '../authContext/authContext';
 import { async } from '@firebase/util';
 import Alert from 'react-bootstrap/Alert';
+import { GoogleLoginButton } from "react-social-login-buttons"
 
 
 
@@ -26,7 +27,7 @@ export default function Login() {
 
     const navigate= useNavigate();
 
-    const {login} =useAuth()
+    const {login, loginWithGoogle} =useAuth()
 
     const handleChange = ({target: {name, value}}) =>{
 
@@ -61,7 +62,11 @@ export default function Login() {
                setError(err.code)
       }
     }
-    
+
+ const handleGoogleSingin = async ()=>{
+      await loginWithGoogle()
+      navigate('/listado')
+    }
      
     //let token= sessionStorage.getItem('token')
     
@@ -92,6 +97,7 @@ export default function Login() {
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      <GoogleLoginButton onClick={handleGoogleSingin} />
     </Form>
        </div>
        <br/>
