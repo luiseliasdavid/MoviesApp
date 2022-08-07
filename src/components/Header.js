@@ -5,8 +5,10 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/esm/Button';
-import Buscador from './Buscador'
+
 import Image from 'react-bootstrap/Image'
+
+
 import { useEffect, useState } from 'react';
 import './Header.css'
 
@@ -18,7 +20,7 @@ function Header (props){
   
   //console.log(user)
   useEffect(()=>{
-    if(user !==null){
+    if(user !==null && user.photoURL){
       setUserImg(user.photoURL.toString())
     }
   },[user])
@@ -52,8 +54,12 @@ return(
         </Nav>
         </>}
         {user && !user.displayName && <>
-          <Nav.Link>welcome: {user.email}</Nav.Link>
-        </>}
+          <Nav className="me-auto">
+          <Nav.Link >welcome: {user.email}</Nav.Link>
+          <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
+          </Nav>
+        </>
+        }
         { user && user.displayName && <>
           <Nav className="me-auto">
           {/* <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link> */}
@@ -72,9 +78,7 @@ return(
         </div>
       </Navbar>
 
-      <Navbar>
-      <Buscador />
-      </Navbar>
+     
       
     </header>
 )

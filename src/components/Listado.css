@@ -13,5 +13,23 @@
     border: none;
     font-size: 15px;
     }
-
+.paginado{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+.select{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+}
+.header2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.paginado{
+    display: flex;
+    
+}
     

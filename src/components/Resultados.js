@@ -10,7 +10,7 @@ function Resultados() {
   let keyword = query.get("keyword");
   const [movieResults, setMovieResults] = useState([]);
   
-  let token = sessionStorage.getItem("token");
+  //let token = sessionStorage.getItem("token");
   useEffect(() => {
     const endPoint=`https://api.themoviedb.org/3/search/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=1&include_adult=false&query=${keyword}`
     axios.get(endPoint)
@@ -32,7 +32,7 @@ function Resultados() {
   //console.log(keyword);
   return (
     <>
-    {!token && <Navigate to="/" />}
+    {/* {!token && <Navigate to="/" />} */}
     <h2>Buscaste: {keyword}</h2> 
     {movieResults.length ===0 && <h3>No hay resultados</h3> }
       <div className="row">

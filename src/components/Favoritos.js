@@ -22,7 +22,7 @@ function Favoritos (props) {
 
     return(
         <>
-         {!token && <Navigate to="/" />}
+         {/* {!token && <Navigate to="/" />} */}
         <h2>Seccion Favoritos</h2>
         <div className="row">
          { !props.favorites.length && <div className="col-12 text-danger">No tienes favoritos</div> }   

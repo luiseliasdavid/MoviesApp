@@ -12,12 +12,21 @@ import Register from './components/Register'
 import './App.css'
 import {AuthProvider} from './authContext/authContext'
 import { ProtectedRoute } from './components/ProtectedRoute';
+import {  useDispatch } from 'react-redux'
+import { getMoviesFromApi } from './features/movies/moviesSlice';
 
 
 function App() {
   const [favorites,setFavorites] = useState([])
+ const dispatch = useDispatch()
+ 
+ const apiInfo = async ()=>{
+   await dispatch( getMoviesFromApi())
+ }
+
 
 useEffect(()=>{
+  apiInfo()
     const favsInLocal = localStorage.getItem('favs')
 
     if(favsInLocal !== null){

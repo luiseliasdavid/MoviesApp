@@ -34,7 +34,8 @@ const [oneError, setOneError] = useState(null)
 
     return(
     <>
-    {!token || oneError===1? <Navigate to='/'/>:null }
+    {/* {!token || oneError===1? <Navigate to='/'/>:null } */}
+    { oneError===1? <Navigate to='/'/>:null }
     {!movie && <p>Cargando...</p> }
     {/* {error && <h3>Hubo un error ,vuelve al listado</h3>} */}
     {movie && <>

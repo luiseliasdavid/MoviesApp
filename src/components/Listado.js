@@ -1,62 +1,122 @@
-import { Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState} from "react";
 import axios from "axios";
 import { Card, Button, CardGroup } from "react-bootstrap";
-import swal from "sweetalert";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import './Listado.css'
-import { useAuth } from "../authContext/authContext";
+//import { useAuth } from "../authContext/authContext";
+import Paginado from './Paginado';
+import Buscador from './Buscador'
+import Form from 'react-bootstrap/Form'
+import { setMoviesState } from "../features/movies/moviesSlice";
+import { orderByRating } from "../features/movies/moviesSlice";
 
 
 export default function Listado(props) {
   
-  const authContext= useAuth()
-
+  //const authContext= useAuth()
+  
   //console.log(authContext.user)
+  //let token = sessionStorage.getItem("token");
+  const moviList = useSelector(state=> state.movies.movies)
+  //console.log(moviList)
+  const dispatch = useDispatch()
 
-  let token = sessionStorage.getItem("token");
+  // const [moviList, setMoviList] = useState([]);
 
+  //  setMoviList(moviState.movies)
 
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage =15
   
-  //const navigate= useNavigate()
 
-  //otra forma de de redirigir si no  esta logueado
-  // useEffect(()=>{
-  //     const token= localStorage.getItem('token')
-  //    if(token===null){
-  //      navigate('/')}
-  // },[navigate])
-  const [moviList, setMoviList] = useState([]);
+  const paginas = Math.ceil(moviList.length / moviesPerPage);
 
-  useEffect( () => {
+  const indexOfLastmovie = currentPage * moviesPerPage; //6
+  const indexOfFirstmovie = indexOfLastmovie - moviesPerPage; //0
+  const currentmovie = moviList?.slice(indexOfFirstmovie,indexOfLastmovie);
 
-    const getPelis =  async() => {
-      const apiGamesInfo = 5; 
-     
-      let pelis=[]
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
     
-      for (let i = 1; i <= apiGamesInfo; i++) {
-        pelis.push(await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=${i}`)
-      .then(res=>res.data.results))}
-        
-        setMoviList(pelis.flat())
-         }
-    getPelis()
-   
-}, [setMoviList]);
+  };
 
+//   const getPelis =  async() => {
+
+//     const apiGamesInfo = 5; 
+   
+//     let pelis=[]
   
+//     for (let i = 1; i <= apiGamesInfo; i++) {
+//       pelis.push(await axios.get(
+//     `https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=${i}`)
+//     .then(res=>res.data.results))}
+      
+//       setMoviList(pelis.flat())
+//        }
+     
+//   useEffect( () => {
+//     setMoviList(moviList.movie)
+    
+// }, []);
+
+// para buscar por genero https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=en-US&with_genres=
+
+function handleNext(e) {
+  e.preventDefault();
+  if (currentPage < paginas) {
+    setCurrentPage(currentPage + 1);
+  }
+}
+function handlePrev(e) {
+  e.preventDefault();
+  if (currentPage > 1) {
+    setCurrentPage(currentPage - 1);
+  }
+}
+function handleOrder (e){
+  console.log(e.target.value)
+  dispatch(orderByRating(moviList))
  
+}
   return (
     <>
       {/* {!token && <Navigate to="/" />} */}
+      <div className="header2">
+      <div className="select">
+      <Form.Select  onChange={(e)=>handleOrder(e)} >
+        <option>Select by rating</option>
+        <option>All movies</option>
+        <option>ascendente</option>
+        <option>descendente</option>
 
+      </Form.Select>
+      <Form.Select  >
+        <option>Select by rating</option>
+      </Form.Select>
+      </div>
+      <Buscador />
+      </div>
+      <div className="paginado">
+
+      <Paginado 
+      className='paginado'
+              paginas={paginas}
+              handleNext = {handleNext}
+              handlePrev = {handlePrev}
+              moviesPerPage={moviesPerPage}
+              moviList={moviList.length}
+              paginado={paginado}
+              currentPage={currentPage}
+              
+            />
+            </div>
       <div className="row">
-        {moviList?.map((oneMovie, index) => {
+        {currentmovie?.map((oneMovie, index) => {
           return (
             <div className="col-3" key={index}>
               <CardGroup>
+
                 <Card style={{ width: "18rem" }}>
                   <Card.Img
                     variant="top"
@@ -87,6 +147,21 @@ export default function Listado(props) {
           );
         })}
       </div>
+      <div className="paginado">
+      <Paginado
+              paginas={paginas}
+              handleNext = {handleNext}
+              handlePrev = {handlePrev}
+              moviesPerPage={moviesPerPage}
+              moviList={moviList.length}
+              paginado={paginado}
+              currentPage={currentPage}
+            />
+      <br></br>
+      <br></br>
+      <br></br>
+            <p>.</p>
+            </div>
       <br></br>
       <br></br>
       <p>.</p>
@@ -94,29 +169,3 @@ export default function Listado(props) {
   );
 }
 
-/*
-
-const getApiInfo =  () => {
-  const apiGamesInfo = 5; 
- 
-  let pelis=[]
-
-  for (let i = 1; i <= apiGamesInfo; i++) {
-    pelis.push(axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=i`).then(res=>res.data.results))}
-    
-    return Promise.all(nonstop)
-     .then(res=>console.log(res))
-
-*/
-/*
-const getApiInfo =  () => {
-  const apiGamesInfo = 5; 
- 
-  let pelis=[]
-
-  for (let i = 1; i <= apiGamesInfo; i++) {
-    pelis.push(axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=i`).then(res=>res.data.results))}
-    
-    return Promise.all(nonstop)
-     .then(res=>console.log(res))
-*/
