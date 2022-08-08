@@ -13,26 +13,26 @@ import { useEffect, useState } from 'react';
 import './Header.css'
 
 
-function Header (props){
+function Header(props) {
 
-  const {user, logout} = useAuth()
+  const { user, logout } = useAuth()
   const [userImg, setUserImg] = useState('')
-  
+
   //console.log(user)
-  useEffect(()=>{
-    if(user !==null && user.photoURL){
+  useEffect(() => {
+    if (user !== null && user.photoURL) {
       setUserImg(user.photoURL.toString())
     }
-  },[user])
+  }, [user])
 
-const handleLogout = async () =>{
-  await logout()
-}
-// console.log(user?.photoURL)
-return(
+  const handleLogout = async () => {
+    await logout()
+  }
+  // console.log(user?.photoURL)
+  return (
     <header className='container p-3 my-3 border'>
-        <div></div>
-         <Navbar bg="dark" variant="dark">
+      <div></div>
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Movies App</Navbar.Brand>
           <Nav className="me-auto">
@@ -41,47 +41,47 @@ return(
             <Nav.Link href="favoritos">Favoritos</Nav.Link>
             <Nav.Link href="contacto">Contacto</Nav.Link>
             <Nav.Link href='#' variant="red">
-              {props.favorites.length>0 && <> Favoritos:{props.favorites.length} </>}
-              </Nav.Link>
+              {props.favorites.length > 0 && <> Favoritos:{props.favorites.length} </>}
+            </Nav.Link>
           </Nav>
-          </Container>
-          <div className="cont2">
-        {!user &&
-        <>
-        <Nav className="me-auto">
-        <Nav.Link href='login' variant="red">Login</Nav.Link>
-        <Nav.Link href='register' variant="red">Register </Nav.Link>
-        </Nav>
-        </>}
-        {user && !user.displayName && <>
-          <Nav className="me-auto">
-          <Nav.Link >welcome: {user.email}</Nav.Link>
-          <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
-          </Nav>
-        </>
-        }
-        { user && user.displayName && <>
-          <Nav className="me-auto">
-          {/* <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link> */}
-         
-         <div className='name-buttom'>
-        <Nav.Link className="me-auto">Welcome: {user.displayName}</Nav.Link>
-          <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
-        
-         </div>
-        {userImg && <Image roundedCircle={true} src={userImg} alt={user.name} />}
-        
-          </Nav>
-        </>
+        </Container>
+        <div className="cont2">
+          {!user &&
+            <>
+              <Nav className="me-auto">
+                <Nav.Link href='login' variant="red">Login</Nav.Link>
+                <Nav.Link href='register' variant="red">Register </Nav.Link>
+              </Nav>
+            </>}
+          {user && !user.displayName && <>
+            <Nav className="me-auto">
+              <Nav.Link >welcome: {user.email}</Nav.Link>
+              <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
+            </Nav>
+          </>
+          }
+          {user && user.displayName && <>
+            <Nav className="me-auto">
+              {/* <Nav.Link href='#' variant="red">welcome: {user.email} </Nav.Link> */}
 
-        }
+              <div className='name-buttom'>
+                <Nav.Link className="me-auto">Welcome: {user.displayName}</Nav.Link>
+                <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
+
+              </div>
+              {userImg && <Image roundedCircle={true} src={userImg} alt={user.name} />}
+
+            </Nav>
+          </>
+
+          }
         </div>
       </Navbar>
 
-     
-      
+
+
     </header>
-)
+  )
 
 }
 

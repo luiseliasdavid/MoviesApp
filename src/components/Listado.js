@@ -9,22 +9,19 @@ import Paginado from './Paginado';
 import Buscador from './Buscador'
 import Form from 'react-bootstrap/Form'
 import { setMoviesState } from "../features/movies/moviesSlice";
-import { orderByRating } from "../features/movies/moviesSlice";
+import { orderByRating, getMoviesByGenre } from "../features/movies/moviesSlice";
+import { current } from "@reduxjs/toolkit";
 
 
 export default function Listado(props) {
   
-  //const authContext= useAuth()
-  
-  //console.log(authContext.user)
-  //let token = sessionStorage.getItem("token");
+
   const moviList = useSelector(state=> state.movies.movies)
-  //console.log(moviList)
+  const moviListCopia = useSelector(state=> state.movies.moviesCopia)
+  const genres = useSelector(state=> state.movies.genres)
+  
   const dispatch = useDispatch()
 
-  // const [moviList, setMoviList] = useState([]);
-
-  //  setMoviList(moviState.movies)
 
   const [currentPage, setCurrentPage] = useState(1);
   const moviesPerPage =15
@@ -41,26 +38,7 @@ export default function Listado(props) {
     
   };
 
-//   const getPelis =  async() => {
 
-//     const apiGamesInfo = 5; 
-   
-//     let pelis=[]
-  
-//     for (let i = 1; i <= apiGamesInfo; i++) {
-//       pelis.push(await axios.get(
-//     `https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=${i}`)
-//     .then(res=>res.data.results))}
-      
-//       setMoviList(pelis.flat())
-//        }
-     
-//   useEffect( () => {
-//     setMoviList(moviList.movie)
-    
-// }, []);
-
-// para buscar por genero https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=en-US&with_genres=
 
 function handleNext(e) {
   e.preventDefault();
@@ -76,9 +54,17 @@ function handlePrev(e) {
 }
 function handleOrder (e){
   console.log(e.target.value)
-  dispatch(orderByRating(moviList))
+  let typeOrder = e.target.value
+  dispatch(orderByRating(moviListCopia, typeOrder))
  
 }
+function handleOrderByGenre (e){
+  let genre= e.target.value
+  
+  dispatch(getMoviesByGenre(moviListCopia,genres ,genre))
+ 
+}
+
   return (
     <>
       {/* {!token && <Navigate to="/" />} */}
@@ -86,13 +72,34 @@ function handleOrder (e){
       <div className="select">
       <Form.Select  onChange={(e)=>handleOrder(e)} >
         <option>Select by rating</option>
-        <option>All movies</option>
+        
         <option>ascendente</option>
         <option>descendente</option>
 
       </Form.Select>
-      <Form.Select  >
-        <option>Select by rating</option>
+      <Form.Select  onChange={(e)=>handleOrderByGenre(e)}>
+        <option>Select by Genre</option>
+        <option>All Genres</option>
+        <option>Action</option>
+        <option>Adventure</option>
+        <option>Animation</option>
+        <option>Crime</option>
+        <option>Comedy</option>
+        <option>Documentary</option>
+        <option>Family"Drama</option>
+        <option>Fantasy</option>
+        <option>History</option>
+        <option>Horror</option>
+        <option>Music</option>
+        <option>Mystery</option>
+        <option>Romance</option>
+        <option>Science</option>
+        <option>Fiction</option>
+        <option>TV Movie</option>
+        <option>Thriller</option>
+        <option>War</option>
+        <option>Western</option>
+        
       </Form.Select>
       </div>
       <Buscador />
@@ -112,6 +119,7 @@ function handleOrder (e){
             />
             </div>
       <div className="row">
+        {!currentmovie.length && <h4>Sin elementos</h4>}
         {currentmovie?.map((oneMovie, index) => {
           return (
             <div className="col-3" key={index}>
@@ -168,4 +176,26 @@ function handleOrder (e){
     </>
   );
 }
+
+
+//   const getPelis =  async() => {
+
+//     const apiGamesInfo = 5; 
+   
+//     let pelis=[]
+  
+//     for (let i = 1; i <= apiGamesInfo; i++) {
+//       pelis.push(await axios.get(
+//     `https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=es-ES&page=${i}`)
+//     .then(res=>res.data.results))}
+      
+//       setMoviList(pelis.flat())
+//        }
+     
+//   useEffect( () => {
+//     setMoviList(moviList.movie)
+    
+// }, []);
+
+// para buscar por genero https://api.themoviedb.org/3/discover/movie?api_key=cc18eb38317f2c9aed2478c00153198a&language=en-US&with_genres=
 
