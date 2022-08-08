@@ -1,5 +1,5 @@
 import axios from 'axios'
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 
 import {useNavigate,Navigate} from 'react-router-dom'
 import { useState } from 'react';
