@@ -1,4 +1,4 @@
-import swal from 'sweetalert2'
+import swal from 'sweetalert'
 import {useNavigate,Navigate} from 'react-router-dom'
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
