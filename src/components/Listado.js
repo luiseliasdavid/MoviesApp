@@ -15,14 +15,15 @@ import { current } from "@reduxjs/toolkit";
 
 export default function Listado(props) {
   
-
-  const moviList = useSelector(state=> state.movies.movies)
+ 
+  
+  const moviList =  useSelector(state=> state.movies.movies)
   const moviListCopia = useSelector(state=> state.movies.moviesCopia)
   const genres = useSelector(state=> state.movies.genres)
   
   const dispatch = useDispatch()
 
-
+  const [loading,setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1);
   const moviesPerPage =15
   
@@ -59,17 +60,23 @@ function handleOrder (e){
  
 }
 function handleOrderByGenre (e){
+  setLoading(true)
   let genre= e.target.value
   
   dispatch(getMoviesByGenre(moviListCopia,genres ,genre))
- 
+  
+  setLoading(false)
+
+  console.log(moviList)
 }
+  
+
 
   return (
     <>
       {/* {!token && <Navigate to="/" />} */}
       <div className="header2">
-      <div className="select">
+      <div className="select2">
       <Form.Select  onChange={(e)=>handleOrder(e)} >
         <option>Select by rating</option>
         
@@ -77,6 +84,7 @@ function handleOrderByGenre (e){
         <option>descendente</option>
 
       </Form.Select>
+
       <Form.Select  onChange={(e)=>handleOrderByGenre(e)}>
         <option>Select by Genre</option>
         <option>All Genres</option>
@@ -102,7 +110,7 @@ function handleOrderByGenre (e){
         
       </Form.Select>
       </div>
-      <Buscador />
+      <Buscador className="buscador" />
       </div>
       <div className="paginado">
 
@@ -119,7 +127,9 @@ function handleOrderByGenre (e){
             />
             </div>
       <div className="row">
-        {!currentmovie.length && <h4>Sin elementos</h4>}
+        {loading===true  && moviList.length===0 && <h4>Cargando...</h4>}
+        {loading===false &&  moviList.length===0 && <h4>Sin elementos</h4>}
+       
         {currentmovie?.map((oneMovie, index) => {
           return (
             <div className="col-3" key={index}>

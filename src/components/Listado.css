@@ -18,8 +18,8 @@
     justify-content: center;
     padding: 5px;
 }
-.select{
-    width: 70%;
+.select2{
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -31,5 +31,22 @@
 .paginado{
     display: flex;
     
+}
+.buscador {
+    width: 100%;
+}
+
+@media screen and (max-width: 700px){
+    .buscador {
+        width: 100%;
+    }
+    .header2{
+        display:inline-block; 
+        margin: 0 auto;
+    }
+    .row {
+    display:inline-block
+
+    }
 }
     
