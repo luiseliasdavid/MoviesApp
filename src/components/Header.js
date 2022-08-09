@@ -18,13 +18,13 @@ function Header(props) {
   const { user, logout } = useAuth()
   const [userImg, setUserImg] = useState('')
 
-  //console.log(user)
   useEffect(() => {
     if (user !== null && user.photoURL) {
       setUserImg(user.photoURL.toString())
     }
   }, [user])
-
+  
+  
   const handleLogout = async () => {
     await logout()
   }
