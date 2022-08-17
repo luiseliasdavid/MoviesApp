@@ -9,6 +9,7 @@ import Detalle from './components/Detalle'
 import Resultados from './components/Resultados';
 import Favoritos from './components/Favoritos';
 import Register from './components/Register'
+import Contacto from './components/Contacto'
 import './App.css'
 import {AuthProvider} from './authContext/authContext'
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -58,7 +59,7 @@ useEffect(()=>{
     const movieData = {
       imageUrl, title, overView,
       id: btn.dataset.movieId
-    }
+    } 
     
 
     let moviesIsInArray = tempsMoviesFavs.find( oneMovie => {
@@ -105,6 +106,7 @@ useEffect(()=>{
           <Route path='/detalle' element={<Detalle />} />
           <Route path='/resultados' element={<Resultados addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
           <Route path='/favoritos' element={<Favoritos favorites={favorites} addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
+          <Route path='/contacto' element={<Contacto />}/>} />
 
         </Routes>
 
