@@ -21,7 +21,7 @@ function App() {
  const dispatch = useDispatch()
  
  const apiInfo = async ()=>{
-   await dispatch( getMoviesFromApi())
+    await dispatch( getMoviesFromApi())
  }
 
 
