@@ -106,7 +106,7 @@ useEffect(()=>{
           <Route path='/detalle' element={<Detalle />} />
           <Route path='/resultados' element={<Resultados addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
           <Route path='/favoritos' element={<Favoritos favorites={favorites} addOrRemoveFromFavs={addOrRemoveFromFavs}/>} />
-          <Route path='/contacto' element={<Contacto />}/>} />
+          <Route path='/contacto' element={<Contacto />} />
 
         </Routes>
 
