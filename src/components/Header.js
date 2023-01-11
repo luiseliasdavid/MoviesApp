@@ -18,11 +18,14 @@ function Header(props) {
   const { user, logout } = useAuth()
   const [userImg, setUserImg] = useState('')
 
+  
+
   useEffect(() => {
     if (user !== null && user.photoURL) {
+     
       setUserImg(user.photoURL.toString())
     }
-  }, [user])
+  }, [user, userImg])
   
   
   const handleLogout = async () => {
@@ -69,7 +72,7 @@ function Header(props) {
                 <Button onClick={handleLogout} size="sm" variant="outline-secondary">LogOut</Button>
 
               </div>
-              {userImg && <Image roundedCircle={true} src={userImg} alt={user.name} />}
+              {userImg && <Image roundedCircle src={userImg} alt={user.name} />}
 
             </Nav>
           </>

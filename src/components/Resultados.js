@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Button, CardGroup } from "react-bootstrap";
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 import { Navigate } from "react-router-dom";
 
 function Resultados() {
@@ -17,7 +17,7 @@ function Resultados() {
     .then(response => {
       const movieData= response.data.results;
       if (movieData.length===0){
-      swal({
+      swal.fire({
         title: 'tu busqueda no arrojo resultados'
       }) }
       setMovieResults(movieData)

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 import axios from 'axios';
 
 function Detalle (){
@@ -25,7 +25,7 @@ const [oneError, setOneError] = useState(null)
         })
         .catch(error => { 
         
-            swal({title:error.message})
+            swal.fire({title:error.message})
             setOneError(1)
     })
 },[movieID] 

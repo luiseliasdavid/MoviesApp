@@ -1,12 +1,10 @@
-import axios from 'axios'
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 
 import {useNavigate,Navigate} from 'react-router-dom'
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useAuth } from '../authContext/authContext';
-import { async } from '@firebase/util';
 import Alert from 'react-bootstrap/Alert';
 import { GoogleLoginButton } from "react-social-login-buttons"
 
@@ -38,7 +36,7 @@ export default function Login() {
         setError('')
 
         if(userData.email==='' || userData.password===''){
-            swal(
+            swal.fire(
                 
                 { title: "Los campos no pueden estar vacios"}
             )

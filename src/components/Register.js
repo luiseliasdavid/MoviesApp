@@ -1,4 +1,4 @@
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 import {useNavigate,Navigate} from 'react-router-dom'
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
@@ -34,7 +34,7 @@ export default function Register() {
         setError('')
 
         if(userData.email==='' || userData.password===''){
-            swal(
+            swal.fire(
                 
                 { title: "Los campos no pueden estar vacios"}
             )

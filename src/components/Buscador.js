@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 import {useNavigate} from 'react-router-dom'
 
 
