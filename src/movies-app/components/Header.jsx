@@ -1,10 +1,11 @@
-import { useAuth } from '../authContext/authContext'
+
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/esm/Button'
 import Image from 'react-bootstrap/Image'
 import './Header.css'
+import { useAuth } from '../../authContext/authContext'
 
 function Header(props) {
   const { user, logout, photo } = useAuth()
@@ -20,7 +21,6 @@ function Header(props) {
           <Navbar.Brand href="#home">Movies App</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="listado">Home</Nav.Link>
-            <Nav.Link href="listado">Listado</Nav.Link>
             <Nav.Link href="favoritos">Favoritos</Nav.Link>
             <Nav.Link href="contacto">Contacto</Nav.Link>
             <Nav.Link href="#" variant="red">

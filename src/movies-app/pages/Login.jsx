@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useAuth } from '../authContext/authContext'
+
 import Alert from 'react-bootstrap/Alert'
 import { GoogleLoginButton } from 'react-social-login-buttons'
+import { useAuth } from '../../authContext/authContext'
 
 export default function Login() {
   const [userData, setUserData] = useState({

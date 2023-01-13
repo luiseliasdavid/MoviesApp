@@ -1,11 +1,11 @@
-import swal from 'sweetalert2'
-import { useNavigate, Navigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useNavigate, Navigate } from 'react-router-dom'
+import swal from 'sweetalert2'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useAuth } from '../authContext/authContext'
 import Alert from 'react-bootstrap/Alert'
 import GoogleButton from 'react-google-button'
+import { useAuth } from '../../authContext/authContext'
 
 export default function Register() {
   const { user } = useAuth()
