@@ -8,7 +8,7 @@ import Alert from 'react-bootstrap/Alert'
 import { GoogleLoginButton } from 'react-social-login-buttons'
 import { useAuth } from '../../authContext/authContext'
 
-export default function Login() {
+export const  Login = () => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',

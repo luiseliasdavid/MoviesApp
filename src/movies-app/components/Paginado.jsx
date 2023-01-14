@@ -1,13 +1,13 @@
 import Pagination from 'react-bootstrap/Pagination'
 
-export default function Paginado({
+export const  Paginado = ({
   moviesPerPage,
   moviList,
   paginado,
   handlePrev,
   handleNext,
   currentPage,
-}) {
+}) => {
   const pageNumbers = []
 
   for (let i = 1; i <= Math.ceil(moviList / moviesPerPage); i++) {

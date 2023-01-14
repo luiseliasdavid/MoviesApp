@@ -7,7 +7,7 @@ import Image from 'react-bootstrap/Image'
 import './Header.css'
 import { useAuth } from '../../authContext/authContext'
 
-function Header(props) {
+export const Header = (props) => {
   const { user, logout, photo } = useAuth()
 
   const handleLogout = async () => {
@@ -83,4 +83,4 @@ function Header(props) {
   )
 }
 
-export default Header
+

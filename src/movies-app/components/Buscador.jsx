@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 
-function Buscador() {
+export const  Buscador = () => {
   const navigate = useNavigate()
 
   const submitHandler = (e) => {
@@ -43,4 +43,4 @@ function Buscador() {
   )
 }
 
-export default Buscador
+

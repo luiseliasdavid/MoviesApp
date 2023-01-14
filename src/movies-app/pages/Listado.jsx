@@ -3,13 +3,12 @@ import { Card, Button, CardGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux/es/exports'
 import Form from 'react-bootstrap/Form'
 import './Listado.css'
+import{ Paginado,  Buscador} from '../components'
+import { getMoviesByGenre, orderByRating } from '../../redux/utils'
 
-import Paginado from '../components/Paginado'
-import Buscador from '../components/Buscador'
-import { getMoviesByGenre } from '../../utils/getMoviesByGenre'
-import { orderByRating } from '../../utils/orderByRating'
 
-export default function Listado(props) {
+
+export const Listado = (props) => {
   const moviList = useSelector((state) => state.movies.movies)
   const moviListCopia = useSelector((state) => state.movies.moviesCopia)
   const genres = useSelector((state) => state.movies.genres)

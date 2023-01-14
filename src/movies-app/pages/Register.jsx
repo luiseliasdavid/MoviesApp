@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert'
 import GoogleButton from 'react-google-button'
 import { useAuth } from '../../authContext/authContext'
 
-export default function Register() {
+export const Register = () => {
   const { user } = useAuth()
 
   const regexEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/

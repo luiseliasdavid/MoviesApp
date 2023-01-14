@@ -1,6 +1,6 @@
 import './Contacto.css'
 
-function Contacto() {
+export const Contacto = () => {
   return (
     <>
       {
@@ -61,4 +61,4 @@ function Contacto() {
   )
 }
 
-export default Contacto
+

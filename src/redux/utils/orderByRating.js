@@ -1,4 +1,4 @@
-import { setMoviesState } from "../redux/moviesSlice"
+import { setMoviesState } from "../moviesSlice"
 
 export const orderByRating = (estado, orden) => (dispatch) => {
     let newOrder = []

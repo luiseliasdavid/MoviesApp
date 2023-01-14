@@ -1,4 +1,4 @@
-import { setMoviesState } from "../redux/moviesSlice"
+import { setMoviesState } from "../moviesSlice"
 
 export const getMoviesByGenre = (movilist, genres, genre) => (dispatch) => {
     let selectGenre = genres.filter((item) => item.name === genre)

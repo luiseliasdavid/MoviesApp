@@ -2,7 +2,7 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../../authContext/authContext'
 
-export function ProtectedRoute({ children }) {
+export const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
 
   if (loading) return <h3>cargando...</h3>

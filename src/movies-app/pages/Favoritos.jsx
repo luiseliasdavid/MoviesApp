@@ -1,6 +1,6 @@
 import { Card, Button, CardGroup } from 'react-bootstrap'
 
-function Favoritos(props) {
+export const Favoritos = (props) => {
   return (
     <>
       <h2>Seccion Favoritos</h2>
@@ -52,4 +52,4 @@ function Favoritos(props) {
   )
 }
 
-export default Favoritos
+
