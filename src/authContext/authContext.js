@@ -9,8 +9,6 @@ import {
 } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
 
-console.log( signInWithPopup)
-
 export const authContext = createContext() 
 
 export const useAuth = () => {
