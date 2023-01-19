@@ -9,7 +9,9 @@ import {
 } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
 
-export const authContext = createContext()
+console.log( signInWithPopup)
+
+export const authContext = createContext() 
 
 export const useAuth = () => {
   const context = useContext(authContext)

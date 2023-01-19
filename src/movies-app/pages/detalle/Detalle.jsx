@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { useDetail } from '../../Hooks/useDetail'
+import { useDetail } from '../../../Hooks/useDetail'
 
 export const  Detalle = () => {
 

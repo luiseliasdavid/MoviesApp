@@ -1,65 +1,37 @@
-import swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-
-import Alert from 'react-bootstrap/Alert'
+import { Form, Button, Alert } from 'react-bootstrap'
 import { GoogleLoginButton } from 'react-social-login-buttons'
-import { useAuth } from '../../authContext/authContext'
+import { useAuth } from '../../../authContext/authContext'
+import { loginSubmmitHandler } from '../helpers/loginSubmmitHandler'
+import { handleGoogleSingin } from '../helpers/handleGoogleSingin'
+import { handleChange } from '../helpers/handleChange'
+import { useUserDataAndError } from '../../../Hooks/useUserDataAndError'
 
-export const  Login = () => {
-  const [userData, setUserData] = useState({
-    email: '',
-    password: '',
-  })
-
-  const [error, setError] = useState('')
+export const Login = () => {
+  let { userData, setUserData, error, setError } = useUserDataAndError()
 
   const navigate = useNavigate()
 
   const { login, loginWithGoogle } = useAuth()
-
-  const handleChange = ({ target: { name, value } }) => {
-    setUserData({ ...userData, [name]: value })
-  }
-
-  const submmitHandler = async (e) => {
-    e.preventDefault()
-    setError('')
-
-    if (userData.email === '' || userData.password === '') {
-      swal.fire({ title: 'Los campos no pueden estar vacios' })
-      return
-    }
-
-    try {
-      console.log(userData.email)
-      await login(userData.email, userData.password)
-      navigate('/listado')
-    } catch (err) {
-      setError(err.code)
-    }
-  }
-
-  const handleGoogleSingin = async () => {
-    await loginWithGoogle()
-    navigate('/listado')
-  }
 
   return (
     <>
       {error && <p> {error} </p>}
       <h2>Formulario de login</h2>
       <div className="row">
-        <Form onSubmit={submmitHandler} className="col-3">
+        <Form
+          onSubmit={(e) =>
+            loginSubmmitHandler(e, setError, userData, login, navigate)
+          }
+          className="col-3"
+        >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
               name="email"
               placeholder="Enter email"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, setUserData, userData)}
             />
             {userData.password?.length > 1 && (
               <p textcolor="red">email debe ser un formato valido</p>
@@ -73,7 +45,7 @@ export const  Login = () => {
               type="password"
               name="password"
               placeholder="Password"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, setUserData, userData)}
             />
             {userData.password?.length < 6 && userData.password.length > 1 && (
               <Alert variant={'warning'}>
@@ -85,7 +57,9 @@ export const  Login = () => {
           <Button variant="primary" type="submit">
             Submit
           </Button>
-          <GoogleLoginButton onClick={handleGoogleSingin} />
+          <GoogleLoginButton
+            onClick={() => handleGoogleSingin(loginWithGoogle, navigate)}
+          />
         </Form>
       </div>
       <br />

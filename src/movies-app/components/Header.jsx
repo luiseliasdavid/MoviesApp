@@ -1,9 +1,4 @@
-
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import Button from 'react-bootstrap/esm/Button'
-import Image from 'react-bootstrap/Image'
+import {Container, Nav, Navbar, Button, Image} from 'react-bootstrap'
 import './Header.css'
 import { useAuth } from '../../authContext/authContext'
 

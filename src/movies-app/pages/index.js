@@ -1,7 +1,7 @@
-export * from './Contacto';
-export * from './Detalle';
-export * from './Favoritos';
-export * from './Listado';
-export * from './Login';
-export * from './Register';
+export * from './contacto/Contacto';
+export * from './detalle/Detalle';
+export * from './favoritos/Favoritos';
+export * from './listado/Listado';
+export * from './login/Login';
+export * from './register/Register';
 

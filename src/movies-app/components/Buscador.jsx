@@ -1,28 +1,25 @@
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import swal from 'sweetalert2'
+import { useState } from 'react'
+import { Button, Form } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { SwalWrapper } from '../../sweetalert/SwalWraper'
 
-export const  Buscador = () => {
+import { validateKeyword } from './helpers/validateSearchKyword'
+
+export const Buscador = () => {
   const navigate = useNavigate()
+  const [error, setError] = useState(null)
 
   const submitHandler = (e) => {
     e.preventDefault()
     const keyword = e.currentTarget.keyword.value.trim()
 
-    if (keyword.length === 0) {
-      swal.fire({
-        title: 'Tienes que escribir una palabra clave',
-      })
-    } else if (keyword.length < 4) {
-      swal.fire({
-        title: 'Tienes que escribir mas de 4 caracteres',
-      })
-    } else {
-      e.currentTarget.keyword.value = ''
-      navigate(`/resultados?keyword=${keyword}`)
-      window.location.reload(1)
+    const error = validateKeyword(keyword)
+
+    if (error) {
+      return setError(error)
     }
+    e.currentTarget.keyword.value = ''
+    navigate(`/resultados?keyword=${keyword}`)
   }
 
   return (
@@ -39,8 +36,7 @@ export const  Buscador = () => {
           Search
         </Button>
       </Form>
+      {error && <SwalWrapper title={error} />}
     </div>
   )
 }
-
-
