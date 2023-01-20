@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-
+console.log(import.meta.env)
 const {
   REACT_APP_API_KEY,
   REACT_APP_AUTH_DOMAIN,

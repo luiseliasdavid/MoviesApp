@@ -1,5 +1,4 @@
 
-
 import { Form, Card, Button, CardGroup } from 'react-bootstrap'
 import './Listado.css'
 import { Paginado, Buscador } from '../../components'
