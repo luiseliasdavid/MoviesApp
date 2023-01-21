@@ -7,7 +7,7 @@ import { handleOrder } from '../helpers/handleOrder'
 import { handleOrderByGenre } from '../helpers/handleOrderByGenre'
 import { useDispatch } from 'react-redux'
 
-export const Listado = (props) => {
+export const Listado = ({addOrRemoveFromFavs}) => {
   const dispatch = useDispatch()
 
   let {
@@ -62,7 +62,7 @@ export const Listado = (props) => {
                   />
                   <Button
                     className="favourtite-btn"
-                    onClick={props.addOrRemoveFromFavs}
+                    onClick={addOrRemoveFromFavs}
                     data-movie-id={oneMovie.id}
                   >
                     🖤

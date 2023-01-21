@@ -13,7 +13,9 @@ module.exports = {
     
     resetMocks: false,
     testEnvironment: "jsdom",
-   
+    transformIgnorePatterns: [
+      "node_modules/(?!firebase/auth/.*)","node_modules/(?!firebase/app/.*)"
+  ],
     
 }
 /*
