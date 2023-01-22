@@ -1,4 +1,3 @@
-
 import { Form, Card, Button, CardGroup } from 'react-bootstrap'
 import './Listado.css'
 import { Paginado, Buscador } from '../../components'
@@ -7,7 +6,7 @@ import { handleOrder } from '../helpers/handleOrder'
 import { handleOrderByGenre } from '../helpers/handleOrderByGenre'
 import { useDispatch } from 'react-redux'
 
-export const Listado = ({addOrRemoveFromFavs}) => {
+export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
   const dispatch = useDispatch()
 
   let {
@@ -21,7 +20,6 @@ export const Listado = ({addOrRemoveFromFavs}) => {
 
   return (
     <>
-   
       <div className="header2">
         <div className="select2">
           <Form.Select
@@ -66,10 +64,20 @@ export const Listado = ({addOrRemoveFromFavs}) => {
                     onClick={addOrRemoveFromFavs}
                     data-movie-id={oneMovie.id}
                   >
-                    🖤
+                    {!favoritesIds.includes(oneMovie.id.toString()) ? (
+                      <i
+                        className="bi bi-heart-fill"
+                        style={{ fontSize: '1rem', color: 'black' }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="bi bi-heart-fill"
+                        style={{ fontSize: '1rem', color: 'red' }}
+                      ></i>
+                    )}
                   </Button>
                   <Card.Body>
-                    <Card.Title aria-label='Card.title' >
+                    <Card.Title aria-label="Card.title">
                       {oneMovie.title.substring(0, 30)}...{' '}
                     </Card.Title>
                     <Card.Text>

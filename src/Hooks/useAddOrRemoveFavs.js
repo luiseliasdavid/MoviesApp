@@ -5,6 +5,9 @@ import { getMoviesFromApi } from '../redux/thunks'
 export const useAddOrRemoveFavs = (e) => {
   const [favorites, setFavorites] = useState([])
   const dispatch = useDispatch()
+  const favoritesIds= []
+
+  for(let movie of favorites) favoritesIds.push(movie.id)
 
   useEffect(() => {
     const apiInfo = async () => {
@@ -62,6 +65,7 @@ export const useAddOrRemoveFavs = (e) => {
   }
   return {
     favorites,
+    favoritesIds,
     addOrRemoveFromFavs,
   }
 }

@@ -5,7 +5,7 @@ import {Contacto, Detalle, Favoritos, Listado, Login, Register} from '../movies-
 
 
 export const AppRouter = () => {
-  let { favorites, addOrRemoveFromFavs } = useAddOrRemoveFavs()
+  let { favorites,favoritesIds, addOrRemoveFromFavs } = useAddOrRemoveFavs()
 
   return (
     <div className="container">
@@ -32,16 +32,16 @@ export const AppRouter = () => {
 
         <Route
           path="/"
-          element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />}
+          element={<Listado favoritesIds={favoritesIds} addOrRemoveFromFavs={addOrRemoveFromFavs} />}
         />
         <Route
           path="/listado"
-          element={<Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />}
+          element={<Listado favoritesIds={favoritesIds} addOrRemoveFromFavs={addOrRemoveFromFavs} />}
         />
         <Route path="/detalle" element={<Detalle />} />
         <Route
           path="/resultados"
-          element={<Resultados addOrRemoveFromFavs={addOrRemoveFromFavs} />}
+          element={<Resultados favorites={favorites} addOrRemoveFromFavs={addOrRemoveFromFavs} />}
         />
         <Route
           path="/favoritos"
