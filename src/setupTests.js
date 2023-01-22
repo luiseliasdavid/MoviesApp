@@ -25,11 +25,7 @@ jest.mock('firebase/auth', ()=>({
  })
 )
 
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: () => (fn) => fn(),
-    useSelector: () => (fn) => fn(),
-}));
+
 const state = {movies:{movies: [], moviesCopia:[], genres:[]}}
 
 jest.mock('react-redux', () => ({

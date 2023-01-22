@@ -21,6 +21,7 @@ export const Listado = ({addOrRemoveFromFavs}) => {
 
   return (
     <>
+   
       <div className="header2">
         <div className="select2">
           <Form.Select
@@ -68,7 +69,7 @@ export const Listado = ({addOrRemoveFromFavs}) => {
                     🖤
                   </Button>
                   <Card.Body>
-                    <Card.Title>
+                    <Card.Title aria-label='Card.title' >
                       {oneMovie.title.substring(0, 30)}...{' '}
                     </Card.Title>
                     <Card.Text>

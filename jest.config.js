@@ -18,11 +18,6 @@ module.exports = {
   ],
     
 }
-/*
- transformIgnorePatterns: [
-      "node_modules/(?!@ngrx|(?!@firebase/auth)|ng-dynamic)"
-    ]
 
-*/
 
 

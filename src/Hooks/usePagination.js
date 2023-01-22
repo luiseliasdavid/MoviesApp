@@ -15,7 +15,7 @@ export const usePagination = () => {
     const indexOfLastmovie = currentPage * moviesPerPage
     const indexOfFirstmovie = indexOfLastmovie - moviesPerPage
     const currentmovie = moviList?.slice(indexOfFirstmovie, indexOfLastmovie)
-    console.log(currentmovie)
+    
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
       }

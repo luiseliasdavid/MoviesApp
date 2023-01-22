@@ -1,52 +1,74 @@
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import { usePagination } from "../../../Hooks/usePagination";
-import { Listado } from "./Listado";
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
+import { usePagination } from '../../../Hooks/usePagination'
+import { Listado } from './Listado'
 
-jest.mock("../../../Hooks/usePagination") 
+jest.mock('../../../Hooks/usePagination')
 
 const addOrRemoveFromFavs = jest.fn().mockResolvedValue({})
 
-describe('Name of the group', () => {
+const initialValues = {
+  currentmovie: [],
+  loading: true,
+  setLoading: () => {},
+  moviList: [],
+  moviListCopia: [],
+  genres: [],
+}
+const movies = [
+  {
+    poster_path: 'htpps//www.mock.com',
+    id: 123,
+    title: 'mockedMovie',
+    overview: 'a really good movie',
+  },
+]
 
-  usePagination.mockResolvedValue({
-    currentmovie : [],
-    loading: true,
-    setLoading: ()=> {},
-    moviList: {},
-    moviListCopia: {},
-    genres:[],
+usePagination.mockReturnValue(initialValues)
+
+describe('testing on Listado', () => {
+  beforeEach(() => jest.clearAllMocks())
+
+  test('if loadin = true, must show: Cargando...', () => {
+    render(
+      <MemoryRouter>
+        <Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByText('Cargando...')).toBeTruthy()
   })
-  beforeEach(() => jest.clearAllMocks() );
-    test('hola', () => {
-        
-         render(          
-              <MemoryRouter>
-                <Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />
-              </MemoryRouter>
-              )
-       
-     //screen.debug()
-     
-     //expect( screen.getByText('Cargando...') ).toBeTruthy()
-    });
-    
-});
+  beforeEach(() => jest.clearAllMocks())
 
-/*
-const usePagination = jest.fn().mockReturnThis({
-    currentmovie : [{
-        title:'jhjkhk',
-        overview: 'https//prueba',
-        id: 123,
-        
-        }],
-    loading: true,
-    setLoading: ()=> {},
-    moviList: {},
-    moviListCopia: {},
-    genres:[],
+  test('if loadin = false && !Movilist.length, must show: Sin lementos', () => {
+    usePagination.mockReturnValue({ ...initialValues, loading: false })
+    render(
+      <MemoryRouter>
+        <Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />
+      </MemoryRouter>,
+    )
+
+    expect(screen.getByText('Sin elementos')).toBeTruthy()
   })
 
+  test('if loadin = false && Movilist.length, must show: movieList', () => {
+    usePagination.mockReturnValue({
+      ...initialValues,
+      loading: false,
+      moviList: movies,
+      moviListCopia: movies,
+      currentmovie: movies,
+    })
 
-*/
+    render(
+      <MemoryRouter>
+        <Listado addOrRemoveFromFavs={addOrRemoveFromFavs} />
+      </MemoryRouter>,
+    )
+    screen.debug()
+    expect(screen.getByLabelText('Card.title')).toBeTruthy()
+    expect(screen.getByLabelText('Card.title').innerHTML).toEqual(
+      'mockedMovie... ',
+    )
+  })
+})
