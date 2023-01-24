@@ -4,22 +4,37 @@ import { Paginado, Buscador } from '../../components'
 import { usePagination } from '../../../Hooks/usePagination'
 import { handleOrder } from '../helpers/handleOrder'
 import { handleOrderByGenre } from '../helpers/handleOrderByGenre'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
   const dispatch = useDispatch()
+  
+  const moviList = useSelector((state) => state.movies.movies)
+  const moviListCopia = useSelector((state) => state.movies.moviesCopia)
+  const genres = useSelector((state) => state.movies.genres)
+  
+  const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const moviesPerPage = 15
 
-  let {
-    currentmovie,
-    loading,
-    setLoading,
-    moviList,
-    moviListCopia,
-    genres,
-  } = usePagination()
+  const paginas = Math.ceil(moviList.length / moviesPerPage)
 
+  const indexOfLastmovie = currentPage * moviesPerPage
+  const indexOfFirstmovie = indexOfLastmovie - moviesPerPage
+  let moviesToRender= moviList?.slice(indexOfFirstmovie, indexOfLastmovie)
+  
+
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+
+
+ 
   return (
-    <>
+    <div className='listado'>
       <div className="header2">
         <div className="select2">
           <Form.Select
@@ -44,13 +59,20 @@ export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
         <Buscador className="buscador" />
       </div>
       <div className="paginado">
-        <Paginado />
+        <Paginado 
+         paginado={paginado}
+          moviList={moviList} 
+          moviesPerPage={moviesPerPage} 
+          currentPage={currentPage}  
+          setCurrentPage={setCurrentPage}
+          paginas={paginas}
+          />
       </div>
       <div className="row">
         {loading === true && moviList.length === 0 && <h4>Cargando...</h4>}
         {loading === false && moviList.length === 0 && <h4>Sin elementos</h4>}
 
-        {currentmovie?.map((oneMovie, index) => {
+        {moviesToRender?.map((oneMovie, index) => {
           return (
             <div className="col-3" key={index}>
               <CardGroup>
@@ -64,7 +86,7 @@ export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
                     onClick={addOrRemoveFromFavs}
                     data-movie-id={oneMovie.id}
                   >
-                    {!favoritesIds.includes(oneMovie.id.toString()) ? (
+                    {!favoritesIds?.includes(oneMovie.id.toString()) ? (
                       <i
                         className="bi bi-heart-fill"
                         style={{ fontSize: '1rem', color: 'black' }}
@@ -97,15 +119,19 @@ export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
         })}
       </div>
       <div className="paginado">
-        <Paginado />
-        <br></br>
-        <br></br>
-        <br></br>
-        <p>.</p>
+      <div className="paginado">
+        <Paginado 
+         paginado={paginado}
+          moviList={moviList} 
+          moviesPerPage={moviesPerPage} 
+          currentPage={currentPage}  
+          setCurrentPage={setCurrentPage}
+          paginas={paginas}
+          />
       </div>
-      <br></br>
-      <br></br>
-      <p>.</p>
-    </>
+        
+      </div>
+      
+    </div>
   )
 }

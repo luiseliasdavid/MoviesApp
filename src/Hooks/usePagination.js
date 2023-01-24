@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
 
@@ -14,7 +14,12 @@ export const usePagination = () => {
   
     const indexOfLastmovie = currentPage * moviesPerPage
     const indexOfFirstmovie = indexOfLastmovie - moviesPerPage
-    const currentmovie = moviList?.slice(indexOfFirstmovie, indexOfLastmovie)
+    let moviesToRender= moviList?.slice(indexOfFirstmovie, indexOfLastmovie)
+    const [currentmovie, setcurrentmovie] = useState(moviesToRender);
+    
+    
+  
+    
     
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -25,15 +30,20 @@ export const usePagination = () => {
         if (currentPage < paginas) {
           setCurrentPage(currentPage + 1)
         }
+      setcurrentmovie(moviesToRender)
       }
       function handlePrev(e) {
         e.preventDefault()
         if (currentPage > 1) {
           setCurrentPage(currentPage - 1)
         }
+        setcurrentmovie(moviesToRender)
       }
-
+       console.log('currentPage',currentPage)
+  //    console.log(indexOfFirstmovie)
+   //   console.log(indexOfLastmovie) 
       return ({
+        moviesToRender,
         loading,
         paginas,
         genres,

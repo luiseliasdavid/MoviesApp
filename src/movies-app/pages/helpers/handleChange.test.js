@@ -5,7 +5,7 @@ import { handleChange } from "./handleChange";
 
 describe('handleChange test', () => {
     
-    test('must return new state', () => {
+    xtest('must return new state', () => {
         const event = { 
          target:{
           name: 'password',

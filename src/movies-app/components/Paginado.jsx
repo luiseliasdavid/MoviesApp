@@ -1,22 +1,26 @@
 import Pagination from 'react-bootstrap/Pagination'
-import { usePagination } from '../../Hooks/usePagination'
 
-export const  Paginado = () => {
 
-  let {
-    moviesPerPage,
-    moviList,
-    paginado,
-    handlePrev,
-    handleNext,
-    currentPage,
-  } = usePagination()
+export const  Paginado = ({paginado,moviList,moviesPerPage,currentPage,setCurrentPage,paginas}) => {
+
+
   const pageNumbers = []
-
-  for (let i = 1; i <= Math.ceil(moviList / moviesPerPage); i++) {
+  
+  for (let i = 1; i <= Math.ceil(moviList?.length / moviesPerPage); i++) {
     pageNumbers.push(i)
   }
-
+  function handleNext(e) {
+    e.preventDefault()
+    if (currentPage < paginas) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+  function handlePrev(e) {
+    e.preventDefault()
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
   return (
     <Pagination>
       {currentPage > 1 && <Pagination.Prev onClick={handlePrev} />}
