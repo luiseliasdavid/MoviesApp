@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+
 
 const initialState = {
   movies: [],
   moviesCopia: [],
   genres: [],
+  moviesPerPage : 15,
+  loading: true,
+  currentPage:1
 }
 
 export const moviesSlice = createSlice({
@@ -21,8 +24,18 @@ export const moviesSlice = createSlice({
     getGenres: (state, action) => {
       state.genres = action.payload
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload
+    },
+    setCurrentPage: (state, action) =>{
+      if(action.payload==='next')
+      {state.currentPage += 1}
+      if(action.payload==='prev')
+      {state.currentPage -= 1}
+      if(typeof(action.payload)==='number') {state.currentPage= action.payload}
+        }
   },
 })
 
-export const { getMovies, setMoviesState, getGenres } = moviesSlice.actions
+export const { getMovies, setMoviesState, getGenres , setLoading, setCurrentPage } = moviesSlice.actions
 export default moviesSlice.reducer

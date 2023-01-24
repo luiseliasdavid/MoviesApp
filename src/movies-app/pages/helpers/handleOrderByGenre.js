@@ -1,3 +1,4 @@
+import { setLoading } from '../../../redux/moviesSlice'
 import { getMoviesByGenre } from '../../../redux/utils'
 
 export const handleOrderByGenre = (
@@ -5,7 +6,7 @@ export const handleOrderByGenre = (
   dispatch,
   moviListCopia,
   genres,
-  setLoading,
+  
 ) => {
   setLoading(true)
   let genre = e.target.value

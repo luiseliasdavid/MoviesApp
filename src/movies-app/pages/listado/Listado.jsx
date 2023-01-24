@@ -1,40 +1,20 @@
 import { Form, Card, Button, CardGroup } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import './Listado.css'
 import { Paginado, Buscador } from '../../components'
 import { usePagination } from '../../../Hooks/usePagination'
 import { handleOrder } from '../helpers/handleOrder'
 import { handleOrderByGenre } from '../helpers/handleOrderByGenre'
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { setLoading } from '../../../redux/moviesSlice'
 
 export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
   const dispatch = useDispatch()
-  
-  const moviList = useSelector((state) => state.movies.movies)
-  const moviListCopia = useSelector((state) => state.movies.moviesCopia)
-  const genres = useSelector((state) => state.movies.genres)
-  
-  const [loading, setLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
-  const moviesPerPage = 15
+  const loading = useSelector((state) => state.movies.loading)
 
-  const paginas = Math.ceil(moviList.length / moviesPerPage)
+  const { moviesToRender, genres, moviListCopia, moviList } = usePagination()
 
-  const indexOfLastmovie = currentPage * moviesPerPage
-  const indexOfFirstmovie = indexOfLastmovie - moviesPerPage
-  let moviesToRender= moviList?.slice(indexOfFirstmovie, indexOfLastmovie)
-  
-
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-
-
- 
   return (
-    <div className='listado'>
+    <div className="listado">
       <div className="header2">
         <div className="select2">
           <Form.Select
@@ -59,14 +39,7 @@ export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
         <Buscador className="buscador" />
       </div>
       <div className="paginado">
-        <Paginado 
-         paginado={paginado}
-          moviList={moviList} 
-          moviesPerPage={moviesPerPage} 
-          currentPage={currentPage}  
-          setCurrentPage={setCurrentPage}
-          paginas={paginas}
-          />
+        <Paginado />
       </div>
       <div className="row">
         {loading === true && moviList.length === 0 && <h4>Cargando...</h4>}
@@ -119,19 +92,10 @@ export const Listado = ({ favoritesIds, addOrRemoveFromFavs }) => {
         })}
       </div>
       <div className="paginado">
-      <div className="paginado">
-        <Paginado 
-         paginado={paginado}
-          moviList={moviList} 
-          moviesPerPage={moviesPerPage} 
-          currentPage={currentPage}  
-          setCurrentPage={setCurrentPage}
-          paginas={paginas}
-          />
+        <div className="paginado">
+          <Paginado />
+        </div>
       </div>
-        
-      </div>
-      
     </div>
   )
 }
